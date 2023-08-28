@@ -1,0 +1,32 @@
+<flynt-component load:on="visible" name="BlockPostHeader">
+  {# <script type="application/json">{{ jsonData|json_encode }}</script> #}
+    {% if post.thumbnail %}
+      <div class="featuredImage w-full h-full mb-sm md:mb-md">
+        <img class="lazyload object-cover"
+          src="{{ post.thumbnail.src }}"
+          data-srcset="{{function('wp_get_attachment_image_srcset', post.thumbnail.id)}}"
+          data-sizes="auto">
+      </div>
+    {% endif %}
+    <div class="h-auto lg:h-auto w-full grow flex flex-col justify-start gap-sm">
+      <div class="h2">{{ post.title }}</div>
+    </div>
+    {# Carousel #}
+    {# <div data-ref="slider" class="slider swiper-container w-full h-full">
+      <div class="swiper-wrapper w-full h-full">
+        {% for image in carousel %}
+          <div class="slider-item swiper-slide w-full h-full flex items-center justify-center">
+            <figure class="figure w-full h-full relative">
+              <img class="lazyload w-full h-full object-cover relative"
+                src="{{ image.productImage.src | resize(32) }}"
+                data-srcset="{{function('wp_get_attachment_image_srcset', image.productImage.id)}}"
+                data-sizes="auto"
+                alt="{{ image.productImage.alt|e }}">
+            </figure>
+          </div>
+        {% endfor %}
+      </div>
+      <button type="button" data-ref="prev" class="slider-button slider-button--prev"></button>
+      <button type="button" data-ref="next" class="slider-button slider-button--next"></button>
+    </div> #}
+</flynt-component>

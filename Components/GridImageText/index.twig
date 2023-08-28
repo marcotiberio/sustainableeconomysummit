@@ -1,0 +1,63 @@
+<flynt-component load:on="visible" name="GridImageText" style="background-color:{% if options.colorBackground %}{{ options.colorBackground }}{% else %}var(--grey){% endif %};">
+  <div class="wrapper boxed max-w-screen-xl mx-auto">
+    {% if headlineTitle %}
+      <h2 
+        class="max-w-screen-lg mx-auto mb-md md:mb-xl flex justify-center items-center text-center uppercase"
+        style="color:{% if options.colorText %}{{ options.colorText }}{% else %}var(--yellow){% endif %};"
+        >
+          {{ headlineTitle }}
+        </h2>
+    {% endif %}
+    <div 
+      class="w-full max-w-screen-xl mx-auto grid gap-sm"
+      {{ options.gridColumns ? 'data-grid-columns="' ~ options.gridColumns ~ '"' }}>
+      {% for item in items %}
+        <div class="flex flex-col">
+          {% if item.image %}
+            {% if item.image.post_mime_type == 'image/svg+xml'%}
+              <figure class="figure p-sm flex flex-row justify-start items-start">
+                <img class="lazyload w-auto h-auto object-contain"
+                  src="{{ item.image.src | resize(32) }}"
+                  data-srcset="{{function('wp_get_attachment_image_srcset', item.image.id)}}"
+                  data-sizes="auto"
+                  alt="{{ item.image.alt|e }}">
+              </figure>
+            {% else %}
+              <figure class="figure figureImage w-full">
+                <img class="lazyload w-full object-cover"
+                  src="{{ item.image.src | resize(32) }}"
+                  data-srcset="{{function('wp_get_attachment_image_srcset', item.image.id)}}"
+                  data-sizes="auto"
+                  alt="{{ item.image.alt|e }}">
+              </figure>
+            {% endif %}
+          {% endif %}
+          <div class="w-full flex flex-col grow justify-between" style="background-color:{% if item.colorBoxBackground %}{{ item.colorBoxBackground }}{% else %}var(--white){% endif %};">
+            <div class="w-full flex flex-col p-sm">
+              {% if item.title %}
+                <div class="pb-sm font-h3">{{ item.title }}</div>
+              {% endif %}
+              {% if item.contentHtml %}
+                <div class="pt-sm border-t">{{ item.contentHtml|e('wp_kses_post') }}</div>
+              {% endif %}
+            </div>
+            {% if item.buttonLink %}
+              <div class="w-full p-sm">
+                <a class="button button--outline mt-lg" href="{{ item.buttonLink.url }}"{% if item.buttonLink.target %} target="{{ item.buttonLink.target }}" rel="noreferrer noopener"{% endif %}>
+                  {{ item.buttonLink.title|e }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% if footerButton %}
+      <div class="w-full p-sm md:p-md flex flex-row items-center justify-center">
+        <a class="button button--yellow" href="{{ footerButton.url }}"{% if footerButton.target %} target="{{ footerButton.target }}" rel="noreferrer noopener"{% endif %}>
+          {{ footerButton.title|e }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</flynt-component>

@@ -1,0 +1,84 @@
+[is='flynt-grid-all-posts'] {
+  .ajax-load-more-wrap {
+    grid-column-end: 9;
+    grid-column-start: 1;
+    margin: 0 auto;
+    max-width: 1680px;
+    width: 100%;
+
+    @media (max-width: $breakpoint-mobile) {
+      margin: 0;
+      max-width: 100%;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      grid-column-end: 9;
+      grid-column-start: 1;
+    }
+
+    .programm-calendar {
+      display: flex;
+      flex-flow: column wrap;
+      padding: var(--spacingSmall);
+  
+      .post-event {
+        width: 100%;
+  
+        .post-inner {
+          align-items: center;
+          display: grid;
+          grid-template-columns: 1fr 2fr 2fr 1fr;
+  
+          .column-left {
+            text-align: left;
+          }
+  
+          .column-center {
+            text-align: center;
+          }
+
+          .column-right {
+            text-align: right;
+          }
+        } 
+      }
+    }
+
+    .alm-load-more-btn {
+      appearance: none !important;
+      background-color: var(--white) !important;
+      // background-repeat: no-repeat;
+      // background-position: center;
+      // background-size: contain;
+      border: 1px solid var(--black) !important;
+      border-radius: 0 !important;
+      color: var(--black) !important;
+      cursor: pointer !important;
+      display: inline-block !important;
+      font-family: 'NB International', sans-serif !important;
+      font-size: 1rem !important;
+      font-weight: 400 !important;
+      height: fit-content !important;
+      line-height: inherit !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      text-transform: uppercase !important;
+      transition: all 0.2s linear !important;
+      user-select: none !important;
+  
+      &:hover,
+      &:focus {
+        background-color: var(--black) !important;
+        border-color: var(--black) !important;
+        color: var(--white) !important;
+        transition: all 0.2s linear !important;
+      }
+    }
+  
+    .alm-load-more-btn.loading {
+      display: none !important;
+      height: 0 !important;
+      width: 0 !important;
+    }
+  }
+}
